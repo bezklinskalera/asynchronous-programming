@@ -1,123 +1,138 @@
-//Безклинська Валерія. Варіант 2.
-
-//ЗАВДАННЯ - Пошта
-//Симулювати роботу пошти. Відправники приходять на пошту, щоб
-//відправити лист/посилку, працівник пошти приймає лист/замовлення,відправляє отримувачам.
-// Відправників і отримувачів може бути декілька (наприклад, по 3), а працівник пошти лише один.
-//Враховуйте робочі години, тобто після закриття пошти лист/посилка може дійти, але вже не приймаються.
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Semaphore;
+import java.io.*;
+import java.util.*;
+import java.util.concurrent.*;
 
 public class Main {
 
-    // Кількість відправників в черзі (обмежена до 3)
-    static final Semaphore tables = new Semaphore(3);
+    private static final int ARRAY_SIZE = 15;
+    private static final String FILE1 = "array1.txt";
+    private static final String FILE2 = "array2.txt";
+    private static final String FILE3 = "array3.txt";
 
-    // Кількість працівників пошти
-    static final Semaphore postalWorker = new Semaphore(1);
+    public static void main(String[] args) throws InterruptedException, ExecutionException, IOException {
+        // Заповнення трьох масивів випадковими числами
+        int[] array1 = new Random().ints(ARRAY_SIZE, 0, 1001).toArray();
+        int[] array2 = new Random().ints(ARRAY_SIZE, 0, 1001).toArray();
+        int[] array3 = new Random().ints(ARRAY_SIZE, 0, 1001).toArray();
 
-    // Список для збереження потоків відправників
+        // Запис масивів у файли
+        writeArrayToFile(array1, FILE1);
+        writeArrayToFile(array2, FILE2);
+        writeArrayToFile(array3, FILE3);
 
-    //Collections.synchronizedList(...): - функція обертає список (ArrayList) у синхронізовану версію, що означає,
-    // що всі операції над списком будуть безпечні для роботи з потоками (thread-safe).
-    // Це важливо, оскільки у програмі кілька потоків можуть одночасно намагатися отримати доступ до списку,
-    // додати нові елементи або читати з нього.
+        // Створення пулу потоків для виконання обробки масивів паралельно
+        // newFixedThreadPool створює фіксовану кількість потоків(3)
+        ExecutorService executor = Executors.newFixedThreadPool(3);
 
-    // Список використовується для зберігання посилань на всі потоки (відправників).
-    // Це дає можливість пізніше чекати на завершення кожного потоку, що дозволяє коректно завершити програму.
+        // Зчитування масивів з файлів та вивід їхнього вмісту
+        System.out.println("Зчитані масиви з файлів:");
+        int[] readArray1 = readArrayFromFile(FILE1);
+        int[] readArray2 = readArrayFromFile(FILE2);
+        int[] readArray3 = readArrayFromFile(FILE3);
 
-    //Використання synchronizedList гарантує, що доступ до списку з боку кількох потоків не призведе до некоректних станів
-    // (наприклад, коли один потік намагається прочитати список, поки інший його модифікує).
-    // Це запобігає виникненню помилок, пов'язаних з одночасним доступом до загального ресурсу.
-    static List<Thread> list = Collections.synchronizedList(new ArrayList<Thread>());
+        System.out.println("Масив 1: " + Arrays.toString(readArray1));
+        System.out.println("Масив 2: " + Arrays.toString(readArray2));
+        System.out.println("Масив 3: " + Arrays.toString(readArray3));
 
-    // Графік поштового відділення (зміннв для перевірки чи відділення відкрите)
-    private static boolean isAvailableHours = true;
+        // Паралельна обробка масивів
+        Future<int[]> futureArray1 = executor.submit(() -> processArray1(readArray1));
+        Future<int[]> futureArray2 = executor.submit(() -> processArray2(readArray2));
+        Future<int[]> futureArray3 = executor.submit(() -> processArray3(readArray3));
 
-    // Перевірка чи відкрите ще дане відділення пошти
-    public static synchronized boolean isOpen () {
-        return isAvailableHours;
+        int[] processedArray1 = futureArray1.get();
+        int[] processedArray2 = futureArray2.get();
+        int[] processedArray3 = futureArray3.get();
+
+        executor.shutdown();
+
+        // Вивід оброблених (але не відсортованих) масивів
+        System.out.println("\nОброблені масиви (не відсортовані):");
+        System.out.println("Оброблений масив 1 (Тільки непарні): " + Arrays.toString(processedArray1));
+        System.out.println("Оброблений масив 2 (Ціла частина після ділення на 3): " + Arrays.toString(processedArray2));
+        System.out.println("Оброблений масив 3 (Числа в межах 50-250): " + Arrays.toString(processedArray3));
+
+        // Сортування оброблених масивів
+        Arrays.sort(processedArray1);
+        Arrays.sort(processedArray2);
+        Arrays.sort(processedArray3);
+
+        // Вивід відсортованих масивів
+        System.out.println("\nВідсортовані оброблені масиви:");
+        System.out.println("Відсортований масив 1: " + Arrays.toString(processedArray1));
+        System.out.println("Відсортований масив 2: " + Arrays.toString(processedArray2));
+        System.out.println("Відсортований масив 3: " + Arrays.toString(processedArray3));
+
+        // Злиття масивів 1 та 2, видалення елементів з третього масиву
+        List<Integer> mergedList = mergeArrays(processedArray1, processedArray2, processedArray3);
+
+        // Вивід результату
+        System.out.println("\nЗлитий масив без елементів з третього:");
+        System.out.println(mergedList);
     }
 
-    // Закриття пошти
-    public static synchronized void closePostOffice () {
-        isAvailableHours = false;
-        System.err.println("================Пошту закрили===================");
+    // Метод для запису масиву у файл
+    private static void writeArrayToFile(int[] array, String filename) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+            for (int num : array) {
+                writer.write(num + " ");
+            }
+        }
     }
 
-    public static void main(String[] args) throws InterruptedException {
-
-        System.err.println("=============Відкриття Нової Пошти================");
-
-        //Створення об’єкту runnable на основі лямбда виразу
-        Runnable postOffice = () -> {
-
-            // Лічильник для відправників
-            int i = 0;
-
-            //Кожен відправник представляється окремим потоком.
-            // Потоки створюються в циклі, і новий потік запускається кожну секунду (Thread.sleep(1000)).
-
-            while (true) {
-
-                //потрібно перевірити, чи відкрита пошта, перед тим як нові відправники можуть зайти,
-                // щоб уникнути ситуацій, коли хтось намагається зайти в закриту пошту.
-
-                //використання Main.class як об'єкта для синхронізації означає, що всі потоки,
-                // які намагаються отримати доступ до цього блоку, блокуватимуться, поки один із потоків виконує цей код.
-
-                synchronized (Main.class) {
-                    // Якщо пошта вже закрита, виходимо з циклу
-                    if (!isOpen()) break;
-                }
-
-                // Створення нового потоку для відправника
-                Thread thr = new Thread(new Senders(), String.valueOf(i));
-                // Запуск потоку
-                thr.start();
-                // Додаємо потік до списку
-                list.add(thr);
-                i++;
-
-                try {
-                    // Новий відправник приходить щосекунди
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+    // Метод для зчитування масиву з файлу
+    private static int[] readArrayFromFile(String filename) throws IOException {
+        List<Integer> list = new ArrayList<>();
+        try (Scanner scanner = new Scanner(new File(filename))) {
+            while (scanner.hasNextInt()) {
+                list.add(scanner.nextInt());
             }
-            System.err.println("=============Працівник обслуговує решту клієнтів================");
+        }
+        return list.stream().mapToInt(i -> i).toArray();
+    }
 
-            for (Thread thr : list) {
-                try {
-                    thr.join(); // Чекаємо, поки потік завершиться
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            System.err.println("=============Працівник завершив обслуговування решти клієнтів================");
-        };
+    // Метод обробки першого масиву: залишити лише непарні значення
+    private static int[] processArray1(int[] array) {
+        return Arrays.stream(array)
+                .filter(n -> n % 2 != 0)
+                .toArray();
+    }
 
-        // Початок роботи пошти,  потік, який виконує основну логіку поштового відділення в програмі
-        Thread postOfficeThread = new Thread(postOffice, "НоваПошта");
-        postOfficeThread.start();
+    // Метод обробки другого масиву: поділити всі числа на 3, залишити лише цілу частину
+    private static int[] processArray2(int[] array) {
+        return Arrays.stream(array)
+                .map(n -> n / 3)
+                .toArray();
+    }
 
-        // Час роботи пошти (6с)
-        Thread.sleep(6000);
-        closePostOffice();
+    // Метод обробки третього масиву: залишити числа в діапазоні [50; 250]
+    private static int[] processArray3(int[] array) {
+        return Arrays.stream(array)
+                .filter(n -> n >= 50 && n <= 250)
+                .toArray();
+    }
 
-        // Очікування завершення роботи пошти
-        postOfficeThread.join();
-
-        // Очікування завершення всіх відправників
-        for (Thread thr : list) {
-            // Чекаємо на завершення кожного потоку
-            thr.join();
+    // Злиття масивів 1 та 2, видалення елементів масиву 3
+    private static List<Integer> mergeArrays(int[] array1, int[] array2, int[] array3) {
+        // Додаємо елементи з array1 та array2 у mergedList
+        List<Integer> mergedList = new ArrayList<>();
+        for (int num : array1) {
+            mergedList.add(num);
+        }
+        for (int num : array2) {
+            mergedList.add(num);
         }
 
-        System.err.println("=============Працівник пішов додому================");
+        // Створюємо Set для зберігання унікальних елементів з array3
+        Set<Integer> setArray3 = new HashSet<>();
+        for (int num : array3) {
+            setArray3.add(num);
+        }
+
+        // Видаляємо з mergedList всі елементи, що є в setArray3
+        mergedList.removeIf(setArray3::contains);
+
+        // Сортуємо mergedList
+        Collections.sort(mergedList);
+        return mergedList;
     }
 }
