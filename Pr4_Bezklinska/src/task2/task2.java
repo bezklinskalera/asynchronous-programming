@@ -3,9 +3,16 @@ package task2;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
+
+/*Напишіть програму, в якій асинхронно виконайте усі необхідні дії.
+Ввести послідовність дійсних чисел (a1, a2, a3, ... an
+) та обчислити
+min(a1, a3, a5, ... ) + max(a2, a4, a6, ... ). Початкову послідовність
+генерувати рандомно, кількість елементів = 20.
+Початкову послідовність та результат вивести на екран.
+До кожного виводу додавати відповідне інформаційне повідомлення.
+В кінці вивести час роботи усіх асинхронних операцій.*/
 
 public class task2 {
     public static void main(String[] args) {

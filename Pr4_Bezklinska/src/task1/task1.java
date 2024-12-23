@@ -3,6 +3,16 @@ package task1;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadLocalRandom;
 
+/*Напишіть програму, яка асинхронно генеруватиме двовимірний
+масив розмірністю 3х3. Потім асинхронно виводитиме кожен
+стовпчик цього масиву додаючи перед значеннями повідомлення
+(наприклад, перший стовпець: 3, 21, 6). Далі продемонструйте роботу
+методу thenRunAsync().
+Результати та початковий масив потрібно виводити на екран
+асинхронно.
+Також після завершення кожної асинхронної задачі потрібно виводити
+на екран час її виконання.*/
+
 public class task1 {
     public static void main(String[] args) {
         long startTime = System.currentTimeMillis();
