@@ -40,6 +40,8 @@ public class task2 {
         CompletableFuture<Double> calculateExpression = generateArray.thenApplyAsync(array -> {
             System.err.println("Обчислення...");
             System.err.println("Послідовность:");
+            //Arrays.stream(array) створює стрім (потік) із елементів масиву array.
+            //mapToObj — перетворює кожен елемент потоку на інший об’єкт
             System.out.println(Arrays.toString(Arrays.stream(array).mapToObj(value -> String.format("%.1f", value)).toArray()));
 
             //обчислення мінімального значення серед непарних елементів масиву

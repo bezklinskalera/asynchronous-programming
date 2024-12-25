@@ -57,10 +57,12 @@ public class task1 {
             long startTime3 = System.currentTimeMillis();
             for (int col = 0; col < array[0].length; col++) {
                 /*Створюється StringBuilder, який використовуватиметься для створення рядка з чисел для кожного стовпця.*/
+                //ефективний спосіб конкатенації строк у Java
                 StringBuilder columnValues = new StringBuilder("Стовпець " + (col + 1) + ": ");
                 for (int row = 0; row < array.length; row++) {
                     columnValues.append(array[row][col]).append(" ");
                 }
+                //trim() — видаляє зайві пробіли з кінця рядка.
                 System.out.println(columnValues.toString().trim());
             }
             System.out.printf("Вивід стовпців виконано за %d мс%n", System.currentTimeMillis() - startTime3);

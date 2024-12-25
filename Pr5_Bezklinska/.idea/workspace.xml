@@ -1,26 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="c2504298-f2af-4aa3-964a-9d47ceaaee74" name="Changes" comment="" />
+    <list default="true" id="c2504298-f2af-4aa3-964a-9d47ceaaee74" name="Changes" comment="added pr5">
+      <change beforePath="$PROJECT_DIR$/../Pr4_Bezklinska/src/task1/task1.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Pr4_Bezklinska/src/task1/task1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Pr4_Bezklinska/src/task2/task2.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Pr4_Bezklinska/src/task2/task2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/task1/task1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/task1/task1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/task2/task2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/task2/task2.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="2qbg4Enkksj0EfQFtIagtHbngAR" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager">
+}</component>
+  <component name="RunManager" selected="Application.task2">
     <configuration name="task1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="task1.task1" />
       <module name="Pr5_Bezklinska" />
@@ -34,8 +59,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="task2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="task2.task2" />
+      <module name="Pr5_Bezklinska" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="task2.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.task2" />
         <item itemvalue="Application.task1" />
       </list>
     </recent_temporary>
@@ -48,10 +87,24 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1734936498013</updated>
+      <workItem from="1734936499053" duration="7644000" />
+      <workItem from="1735119449841" duration="1965000" />
     </task>
+    <task id="LOCAL-00001" summary="added pr5">
+      <created>1734936651996</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1734936651996</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added pr5" />
+    <option name="LAST_COMMIT_MESSAGE" value="added pr5" />
   </component>
 </project>
