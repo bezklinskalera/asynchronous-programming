@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c2504298-f2af-4aa3-964a-9d47ceaaee74" name="Changes" comment="added pr5">
-      <change beforePath="$PROJECT_DIR$/../Pr4_Bezklinska/src/task1/task1.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Pr4_Bezklinska/src/task1/task1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pr4_Bezklinska/src/task2/task2.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Pr4_Bezklinska/src/task2/task2.java" afterDir="false" />
+    <list default="true" id="c2504298-f2af-4aa3-964a-9d47ceaaee74" name="Changes" comment="added decision pr5">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/task1/task1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/task1/task1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/task2/task2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/task2/task2.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +84,7 @@
       <option name="presentableId" value="Default" />
       <updated>1734936498013</updated>
       <workItem from="1734936499053" duration="7644000" />
-      <workItem from="1735119449841" duration="1965000" />
+      <workItem from="1735119449841" duration="3009000" />
     </task>
     <task id="LOCAL-00001" summary="added pr5">
       <created>1734936651996</created>
@@ -97,7 +93,14 @@
       <option name="project" value="LOCAL" />
       <updated>1734936651996</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="added decision pr5">
+      <created>1735124335360</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1735124335360</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -105,6 +108,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added pr5" />
-    <option name="LAST_COMMIT_MESSAGE" value="added pr5" />
+    <MESSAGE value="added decision pr5" />
+    <option name="LAST_COMMIT_MESSAGE" value="added decision pr5" />
   </component>
 </project>
